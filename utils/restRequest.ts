@@ -31,7 +31,9 @@ async function restRequest<T, B = undefined>({
       const errorData = await response.json(); // Parse the error response
       console.log("🚨🚨🚨🚨 ~ error data:", errorData); // Log error details
 
-      throw new Error(errorData?.error?.message || response.statusText); // Throw the error with a message
+      throw new Error(
+        errorData?.message || errorData?.error?.message || response.statusText
+      ); // Throw the error with a message
     }
 
     // If the response status is 204 (No Content), return an empty object
